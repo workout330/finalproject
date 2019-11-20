@@ -39,7 +39,7 @@
 
 
 <br>
-<div class="flex-container">
+<div id="chart-flex" class="flex-container">
 
     <div id="chart"><!-- Plotly chart will be drawn inside this DIV --></div>
     <script>
@@ -55,10 +55,10 @@
             }
         ];
 
-        var layout = {barmode: 'group'};
+        var layout = {barmode: 'group', title: {text: 'Weekly Workout Data'}, xaxis: {title: { text: 'Day'}, rangemode: 'tozero'}, yaxis: {title: { text: 'Hours Worked OUt'}, rangemode: 'tozero'}};
 
 
-        Plotly.newPlot(graphDiv, data);
+        Plotly.newPlot(graphDiv, data, layout);
 
         function newFriend(){
             graphDiv = document.getElementById('chart')
@@ -78,7 +78,7 @@
                 }
             );
 
-            Plotly.newPlot(graphDiv, data);
+            Plotly.newPlot(graphDiv, data, graphDiv.layout);
             console.log('reached')
         }
 
@@ -94,7 +94,7 @@
                 sum = sum + parseInt(dataNew[0].y[i]);
             }
             dataNew[0].y[7] = sum;
-            Plotly.newPlot(graphDiv, dataNew)
+            Plotly.newPlot(graphDiv, dataNew, graphDiv.layout)
         }
 
     </script>
@@ -103,7 +103,7 @@
 </div>
 <div class="flex-container">
     <form id="hoursForm">
-        <b>Add Data</b>
+        <b>Add Hours</b>
         <div class="form-group">
             <label for="SelectDay">Choose Day</label>
             <select class="form-control" id="SelectDay">
